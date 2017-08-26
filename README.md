@@ -1,6 +1,14 @@
 # TelegramBotPHP
+[![API](https://img.shields.io/badge/Telegram%20Bot%20API-July%2021%2C%202017-36ade1.svg)](https://core.telegram.org/bots/api)
+![PHP](https://img.shields.io/badge/php-%3E%3D5.3-8892bf.svg)
+![CURL](https://img.shields.io/badge/cURL-required-green.svg)
+
+[![Total Downloads](https://poser.pugx.org/eleirbag89/telegrambotphp/downloads)](https://packagist.org/packages/eleirbag89/telegrambotphp)
+[![License](https://poser.pugx.org/eleirbag89/telegrambotphp/license)](https://packagist.org/packages/eleirbag89/telegrambotphp)
+[![StyleCI](https://styleci.io/repos/38492095/shield?branch=master)](https://styleci.io/repos/38492095)
+
 > A very simple PHP [Telegram Bot API](https://core.telegram.org/bots) for sending messages.    
-> Compliant with the May 25, 2016 Telegram Bot API update.
+> (Almost) Compliant with the July 21, 2017 Telegram Bot API update.
 
 Requirements
 ---------
@@ -19,24 +27,34 @@ For the GetUpdates:
 Installation
 ---------
 
+
 * Copy Telegram.php into your server and include it in your new bot script
 ```php
 include("Telegram.php");
-$telegram = new Telegram($bot_id);
+$telegram = new Telegram($bot_token);
+```
+
+* To enable error log file, also copy TelegramErrorLogger.php in the same directory of Telegram.php file
+
+#### Using Composer
+
+From your project directory, run
+```
+composer require eleirbag89/telegrambotphp
 ```
 
 Configuration (WebHook)
 ---------
 
 Navigate to 
-https://api.telegram.org/bot(BOT_ID)/setWebhook?url=https://yoursite.com/your_update.php
+https://api.telegram.org/bot(BOT_TOKEN)/setWebhook?url=https://yoursite.com/your_update.php
 Or use the Telegram class setWebhook method.
 
 Examples
 ---------
 
 ```php
-$telegram = new Telegram($bot_id);
+$telegram = new Telegram($bot_token);
 $chat_id = $telegram->ChatID();
 $content = array('chat_id' => $chat_id, 'text' => "Test");
 $telegram->sendMessage($content);
@@ -44,7 +62,7 @@ $telegram->sendMessage($content);
 
 If you want to get some specific parameter from the Telegram response:
 ```php
-$telegram = new Telegram($bot_id);
+$telegram = new Telegram($bot_token);
 $result = $telegram->getData();
 $text = $result["message"] ["text"];
 $chat_id = $result["message"] ["chat"]["id"];
@@ -63,13 +81,13 @@ $telegram->sendPhoto($content);
 To download a file on the Telegram's servers
 ```php
 $file = $telegram->getFile($file_id);
-$telegram->downloadFile($file["file_path"], "./my_downloaded_file_on_local_server.png");
+$telegram->downloadFile($file["result"]["file_path"], "./my_downloaded_file_on_local_server.png");
 ```
 
 See update.php or update cowsay.php for the complete example.
-If you wanna see the CowSay Bot in action [add it] (https://telegram.me/cowmooobot).
+If you wanna see the CowSay Bot in action [add it](https://telegram.me/cowmooobot).
 
-If you want to use GetUpdates instead of the WebHook you need to call the the serveUpdate function inside a for cycle.
+If you want to use GetUpdates instead of the WebHook you need to call the the `serveUpdate` function inside a for cycle.
 ```php
 $req = $telegram->getUpdates();
 for ($i = 0; $i < $telegram-> UpdateCount(); $i++) {
@@ -91,122 +109,88 @@ See getUpdates.php for the complete example.
 Functions
 ------------
 
-For a complete documentation check http://eleirbag89.github.io/TelegramBotPHP/
-* getMe()  
-[A method for testing your bot] (https://core.telegram.org/bots/api#getme).  
-* sendMessage(array $content)  
-[Send a message] (https://core.telegram.org/bots/api#sendmessage).  
-$content is an array with at least chat_id and text.
-* forwardMessage(array $content)  
-[Forward a message] (https://core.telegram.org/bots/api#forwardmessage).  
-$content is an array with chat_id, from_chat_id and message_id.
-* sendPhoto(array $content)  
-[Send a photo] (https://core.telegram.org/bots/api#sendphoto).  
-$content is an array with at least chat_id and photo.
-* sendAudio(array $content)  
-[Send an audio] (https://core.telegram.org/bots/api#sendaudio).  
-$content is an array with at least chat_id and audio.
-* sendDocument(array $content)  
-[Send a document] (https://core.telegram.org/bots/api#senddocument).  
-$content is an array with at least chat_id and document.
-* sendSticker(array $content)  
-[Send a sticker] (https://core.telegram.org/bots/api#sendsticker).  
-$content is an array with at least chat_id and sticker.
-* sendVideo(array $content)  
-[Send a video] (https://core.telegram.org/bots/api#sendvideo).  
-$content is an array with at least chat_id and video.
-* sendVoice(array $content)  
-[Send a voice message] (https://core.telegram.org/bots/api#sendvoice).  
-$content is an array with at least chat_id and audio.
-* sendLocation(array $content)  
-[Send a location] (https://core.telegram.org/bots/api#sendlocation).  
-$content is an array with at least chat_id, latitude and longitude.
-* sendChatAction(array $content)  
-[Send a chat action] (https://core.telegram.org/bots/api#sendchataction).  
-$content is an array with at least chat_id and action.
-* getUserProfilePhotos(array $content)  
-[Get a list of profile pictures for a user] (https://core.telegram.org/bots/api#getuserprofilephotos).  
-$content is an array with at least user_id.
-* getFile($file_id)  
-[Use this method to get basic info about a file and prepare it for downloading] (https://core.telegram.org/bots/api#getfile).  
-* downloadFile($telegram_file_path, $local_file_path)  
-Download a File using the Thelegram's file_path returned from getFile() and save it in $local_file_path. 
-* setWebHook($url, $certificate)  
-[Set a WebHook for the bot] (https://core.telegram.org/bots/api#setwebhook).  
-* getData()  
-Return the user request as array
-* Text()  
-Return the Text of the user message
-* ChatID()  
-Return the id of the chat
-* Date()  
-Return the date of the mesage (Timestamp)
-* FirstName()  
-Return the user's first name
-* LastName()  
-Return the user's last name
-* Username()  
-Return the user's username
-* Callback_Query()  
-Return the Callback_Query
-* Callback_ID()  
-Return the Callback_Query ID
-* Callback_Data()  
-Return the Callback_Query data
-* Callback_Message()  
-Return the Callback_Query message
-* Callback_ChatID()  
-Return the Callback_Query message chat id
-* messageFromGroup()  
-Check if the message is sent from a group chat (boolean)    
-* getUpdates($offset = 0, $limit = 100, $timeout = 0, $update = true)    
-Get the updates. If $update = true confirm the update to Telegram in order to avoid duplicate replies.
-See [Telegram doc] (https://core.telegram.org/bots/api#getting-updates)  for the other parameters.
-* serveUpdate($update)    
-Set the current message to the one with index $update.
-* UpdateID()  
-Get the message's Update ID.
-* UpdateCount()  
-Return the GetUpdates messages count.
+For a complete and up-to-date functions documentation check http://eleirbag89.github.io/TelegramBotPHP/
 
-Build keyboard parameters
+Build keyboards
 ------------
+Telegram's bots can have two different kind of keyboards: Inline and Reply.    
+The InlineKeyboard is linked to a particular message, while the ReplyKeyboard is linked to the whole chat.    
+They are both an array of array of buttons, which rapresent the rows and columns.    
+For instance you can arrange a ReplyKeyboard like this:
+![ReplyKeabordExample](https://picload.org/image/rilclcwr/replykeyboard.png)
+using this code:
+```php
+$option = array( 
+    //First row
+    array($telegram->buildKeyboardButton("Button 1"), $telegram->buildKeyboardButton("Button 2")), 
+    //Second row 
+    array($telegram->buildKeyboardButton("Button 3"), $telegram->buildKeyboardButton("Button 4"), $telegram->buildKeyboardButton("Button 5")), 
+    //Third row
+    array($telegram->buildKeyboardButton("Button 6")) );
+$keyb = $telegram->buildKeyBoard($option, $onetime=false);
+$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => "This is a Keyboard Test");
+$telegram->sendMessage($content);
+```
+When a user click on the button, the button text is send back to the bot.    
+For an InlineKeyboard it's pretty much the same (but you need to provide a valid URL or a Callback data)
+![InlineKeabordExample](https://picload.org/image/rilclcwa/replykeyboardinline.png)
+```php
+$option = array( 
+    //First row
+    array($telegram->buildInlineKeyBoardButton("Button 1", $url="http://link1.com"), $telegram->buildInlineKeyBoardButton("Button 2", $url="http://link2.com")), 
+    //Second row 
+    array($telegram->buildInlineKeyBoardButton("Button 3", $url="http://link3.com"), $telegram->buildInlineKeyBoardButton("Button 4", $url="http://link4.com"), $telegram->buildInlineKeyBoardButton("Button 5", $url="http://link5.com")), 
+    //Third row
+    array($telegram->buildInlineKeyBoardButton("Button 6", $url="http://link6.com")) );
+$keyb = $telegram->buildInlineKeyBoard($option);
+$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => "This is a Keyboard Test");
+$telegram->sendMessage($content);
+```
+This is the list of all the helper functions to make keyboards easily:     
+
 ```php
 buildKeyBoard(array $options, $onetime=true, $resize=true, $selective=true)
 ```
 Send a custom keyboard. $option is an array of array KeyboardButton.  
-Check [ReplyKeyBoardMarkUp] (https://core.telegram.org/bots/api#replykeyboardmarkup) for more info.    
+Check [ReplyKeyBoardMarkUp](https://core.telegram.org/bots/api#replykeyboardmarkup) for more info.    
 
 ```php
 buildInlineKeyBoard(array $inline_keyboard)
 ```
 Send a custom keyboard. $inline_keyboard is an array of array InlineKeyboardButton.  
-Check [InlineKeyboardMarkup] (https://core.telegram.org/bots/api#inlinekeyboardmarkup) for more info.    
+Check [InlineKeyboardMarkup](https://core.telegram.org/bots/api#inlinekeyboardmarkup) for more info.    
 
 ```php
 buildInlineKeyBoardButton($text, $url, $callback_data, $switch_inline_query)
 ```
 Create an InlineKeyboardButton.    
-Check [InlineKeyBoardButton] (https://core.telegram.org/bots/api#inlinekeyboardbutton) for more info.    
+Check [InlineKeyBoardButton](https://core.telegram.org/bots/api#inlinekeyboardbutton) for more info.    
 
 ```php
 buildKeyBoardButton($text, $url, $request_contact, $request_location)
 ```
 Create a KeyboardButton.    
-Check [KeyBoardButton] (https://core.telegram.org/bots/api#keyboardbutton) for more info.    
+Check [KeyBoardButton](https://core.telegram.org/bots/api#keyboardbutton) for more info.    
 
 
 ```php
 buildKeyBoardHide($selective=true)
 ```
 Hide a custom keyboard.  
-Check [ReplyKeyBoarHide] (https://core.telegram.org/bots/api#replykeyboardhide) for more info.    
+Check [ReplyKeyBoarHide](https://core.telegram.org/bots/api#replykeyboardhide) for more info.    
 
 ```php
 buildForceReply($selective=true)
 ```
 Show a Reply interface to the user.  
-Check [ForceReply] (https://core.telegram.org/bots/api#forcereply) for more info.
+Check [ForceReply](https://core.telegram.org/bots/api#forcereply) for more info.
+
+List of Bots using the library
+------------
+Let me know using this [Issue](https://github.com/Eleirbag89/TelegramBotPHP/issues/80) if you have made a bot using this API, I will add it to this section.    
+* [Notifyadbot](https://telegram.me/notifyadbot) - Lang : Persian/Farsi
+* [Partners_shakibonline_bot](https://telegram.me/Partners_shakibonline_bot) - Lang : Persian/Farsi
+* [Pishvazrobot](https://t.me/pishvazrobot) - Lang : Persian/Farsi - the most comprehensive bot for searching and listening to more than 100,000 RBT sound for two most popular and famous mobile operator in iran - MTN Irancell and Hamrahe Aval
 
 Emoticons
 ------------
@@ -219,6 +203,7 @@ You can contact me [via Telegram](https://telegram.me/ggrillo) but if you have a
 
 Support me
 ------------
-You can support me using Flattr.    
+You can buy me a beer or two using [Paypal](https://paypal.me/eleirbag89)    
+or support me using Flattr.    
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=eleirbag89&url=https://github.com/Eleirbag89/TelegramBotPHP&title=TelegramBotPHP&language=&tags=github&category=software) 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5f_5fconstruct',['__construct',['../class_telegram.html#a340324043882a7c5e432ba045425f49a',1,'Telegram']]]
+  ['_5f_5fconstruct_0',['__construct',['../class_telegram.html#af66c0d08ce5066be9c81f4448859797f',1,'Telegram']]]
 ];

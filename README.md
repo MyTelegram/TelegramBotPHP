@@ -1,5 +1,5 @@
 # TelegramBotPHP
-[![API](https://img.shields.io/badge/Telegram%20Bot%20API-November%2017%2C%202017-36ade1.svg)](https://core.telegram.org/bots/api)
+[![API](https://img.shields.io/badge/Telegram%20Bot%20API-April%2016%2C%202022-36ade1.svg)](https://core.telegram.org/bots/api)
 ![PHP](https://img.shields.io/badge/php-%3E%3D5.3-8892bf.svg)
 ![CURL](https://img.shields.io/badge/cURL-required-green.svg)
 
@@ -8,7 +8,7 @@
 [![StyleCI](https://styleci.io/repos/38492095/shield?branch=master)](https://styleci.io/repos/38492095)
 
 A very simple PHP [Telegram Bot API](https://core.telegram.org/bots).    
-Compliant with the November 17, 2017 Telegram Bot API update.
+Compliant with the April 16, 2022 Telegram Bot API update.
 
 Requirements
 ---------
@@ -221,26 +221,6 @@ buildForceReply($selective=true)
 Show a Reply interface to the user.  
 Check [ForceReply](https://core.telegram.org/bots/api#forcereply) for more info.
 
-List of Bots using the library
-------------
-
-Let me know using this [Issue](https://github.com/Eleirbag89/TelegramBotPHP/issues/80) if you have made a bot using this API, I will add it to this section.    
-* [Notifyadbot](https://telegram.me/notifyadbot) - Lang : Persian/Farsi (Down as 16/09/17)
-* [Partners_shakibonline_bot](https://telegram.me/Partners_shakibonline_bot) - Lang : Persian/Farsi (Down as 16/09/17)
-* [Pishvazrobot](https://t.me/pishvazrobot) - Lang : Persian/Farsi - the most comprehensive bot for searching and listening to more than 100,000 RBT sound for two most popular and famous mobile operator in iran - MTN Irancell and Hamrahe Aval
-* [iHarfBot](https://t.me/iHarfBot) - Lang: Persian/Farsi
-* [AsansorBot](https://t.me/AsansorBot) - Lang: Persian/Farsi
-* [IDPbot](https://t.me/IDPbot) - Lang: Persian/Farsi
-* [Evil Insult Generator](https://telegram.me/EvilInsultGeneratorBot) - Lang English/German
-* [ibelitbot](https://telegram.me/ibelitbot) -Lang Persian
-* [skydrivebot](https://telegram.me/skydrivebot) - Lang Persian - Instagram Post Downloader - Youtube Link Generator
-* [Advanced Pools Bot](https://telegram.me/apollbot) - Lang Italian/English([Contribute](https://poeditor.com/join/project/NMAUjrAZ5f))
-* [Btn_Bot](https://telegram.me/Btn_Bot) - Lang pt-BR - Cria botões transparente para publicações.
-* [snesgamesbot](https://telegram.me/snesgamesbot) - Lang: pt-BR/Espanhol/Inglês - Download de ROMs para emuladores do SNES
-* [DiffSGLaPuntabot](https://telegram.me/DiffSGLaPuntabot) [DiffGravinaCTbot](https://telegram.me/DiffGravinaCTbot) [DiffAdranobot](https://t.me/DiffAdranobot) - Lang: it/Italian - Bots to handle Recycling in San Giovanni La Punta, Gravina and Adrano (OpenSource Template https://github.com/Gualty/BOTDifferenziata)
-* [GoBot](https://t.me/CoReYe_PGO_bot)
-* [RaidBot](https://t.me/CoReYe_PGO_Raid_bot)
-
 Emoticons
 ------------
 For a list of emoticons to use in your bot messages, please refer to the column Bytes of this table:
@@ -269,7 +249,6 @@ You can contact me [via Telegram](https://telegram.me/ggrillo) but if you have a
 Support me
 ------------
 
-You can buy me a beer or two using [Paypal](https://paypal.me/eleirbag89)    
-or support me using Flattr.    
+You can support me using via LiberaPay [![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/eleirbag89/donate)
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=eleirbag89&url=https://github.com/Eleirbag89/TelegramBotPHP&title=TelegramBotPHP&language=&tags=github&category=software) 
+or buy me a beer or two using [Paypal](https://paypal.me/eleirbag89). 

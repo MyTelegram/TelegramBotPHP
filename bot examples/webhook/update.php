@@ -23,7 +23,7 @@ $chat_id = $telegram->ChatID();
 
 // Test CallBack
 $callback_query = $telegram->Callback_Query();
-if ($callback_query !== null && $callback_query != '') {
+if (!empty($callback_query)) {
     $reply = 'Callback value '.$telegram->Callback_Data();
     $content = ['chat_id' => $telegram->Callback_ChatID(), 'text' => $reply];
     $telegram->sendMessage($content);
@@ -34,7 +34,7 @@ if ($callback_query !== null && $callback_query != '') {
 
 //Test Inline
 $data = $telegram->getData();
-if ($data['inline_query'] !== null && $data['inline_query'] != '') {
+if (!empty($data['inline_query'])) {
     $query = $data['inline_query']['query'];
     // GIF Examples
     if (strpos('testText', $query) !== false) {
@@ -85,11 +85,11 @@ if (!is_null($text) && !is_null($chat_id)) {
     } elseif ($text == '/inlinekeyboard') {
         // Shows the Inline Keyboard and Trigger a callback on a button press
         $option = [
-                [
+            [
                 $telegram->buildInlineKeyBoardButton('Callback 1', $url = '', $callback_data = '1'),
                 $telegram->buildInlineKeyBoardButton('Callback 2', $url = '', $callback_data = '2'),
-                ],
-            ];
+            ],
+        ];
 
         $keyb = $telegram->buildInlineKeyBoard($option);
         $content = ['chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => 'This is an InlineKeyboard Test with Callbacks'];

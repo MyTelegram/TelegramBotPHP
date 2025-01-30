@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Telegram Error Logger Class.
  *
@@ -10,7 +9,7 @@ class TelegramErrorLogger
 {
     private static $self;
 
-    /// Log request and response parameters from/to Telegrsm API
+    /// Log request and response parameters from/to Telegram API
 
     /**
      * Prints the list of parameters from/to Telegram's API endpoint
@@ -63,7 +62,11 @@ class TelegramErrorLogger
     private function _log_to_file($error_text)
     {
         try {
-            $fileName = __CLASS__.'.txt';
+            $dir_name = 'logs';
+            if (!is_dir($dir_name)) {
+                mkdir($dir_name);
+            }
+            $fileName = $dir_name.'/'.__CLASS__.'-'.date('Y-m-d').'.txt';
             $myFile = fopen($fileName, 'a+');
             $date = '============[Date]============';
             $date .= "\n";
